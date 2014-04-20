@@ -10,6 +10,9 @@ EXPOSE 443
 # Remove old web files
 RUN rm -R /srv/www
 
+# Set correct permissions for storage
+RUN chown nginx:nginx /var/lib/php5
+
 # Add files
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD nginx-ssl.conf /etc/nginx/nginx-ssl.conf
