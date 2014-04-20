@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+set -x
+
+mkdir /srv/www
+pushd /srv/www
+
+git clone git://github.com/phpmyadmin/phpmyadmin.git .
+
+chown -R nginx:nginx .
+
+if [ -e /config/script.pre ]; then
+    echo "Applying pre-configuration script..."
+    /config/script.pre
+fi
+
+if [ -e /config/cert.pem ]; then
+    if [ -e /config/cert.key ]; then
+        echo "Enabling SSL due to presence of certificates!"
+        mv /etc/nginx/nginx-ssl.conf /etc/nginx/nginx.conf
+    fi
+fi
+
+popd
+
