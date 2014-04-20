@@ -7,6 +7,9 @@ RUN zypper --non-interactive in git nginx php-fpm php5-mbstring php5-mysql php5-
 EXPOSE 80
 EXPOSE 443
 
+# Remove old web files
+RUN rm -R /srv/www
+
 # Add files
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD nginx-ssl.conf /etc/nginx/nginx-ssl.conf
