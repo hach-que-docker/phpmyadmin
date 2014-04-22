@@ -11,7 +11,8 @@ EXPOSE 443
 RUN rm -R /srv/www
 
 # Set correct permissions for storage
-RUN chown nginx:nginx /var/lib/php5
+RUN chmod -Rv a+rwX /var/lib/php5
+RUN chown -Rv nginx:nginx /var/lib/php5
 
 # Add files
 ADD nginx.conf /etc/nginx/nginx.conf
