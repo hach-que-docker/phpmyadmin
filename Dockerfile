@@ -10,6 +10,10 @@ EXPOSE 443
 # Remove old web files
 RUN rm -R /srv/www
 
+# Create nginx user and group
+RUN echo "nginx:x:497:495:user for nginx:/var/lib/nginx:/bin/false" >> /etc/passwd
+RUN echo "nginx:!:495:" >> /etc/group
+
 # Set correct permissions for storage
 RUN chmod -Rv a+rwX /var/lib/php5
 RUN chown -Rv nginx:nginx /var/lib/php5
